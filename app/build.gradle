@@ -16,6 +16,8 @@ android {
         versionName "1.0"
 
         buildConfigField("String", "API_KEY", '"8141492a8c854b9cca03e80129698065"')
+        buildConfigField("String", "IMAGE_URL", '"ttps://image.tmdb.org/t/p/w500/"')
+        buildConfigField("String", "BASE_URL", "https://api.themoviedb.org/3/")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -61,6 +63,11 @@ dependencies {
     androidTestImplementation "androidx.test:runner:$androidTestVersion"
     androidTestImplementation "androidx.test:rules:$androidTestVersion"
     androidTestImplementation "androidx.test.ext:junit:$junitExtversion"
-
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+
+    //networking
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    implementation "androidx.test.espresso:espresso-idling-resource:$idlingResVersion"
 }
