@@ -1,7 +1,10 @@
 package com.dicoding.mymovies.utils
 
-class ConstantValue {
+import com.dicoding.mymovies.BuildConfig
 
-    // later: making progress
-    // const val API_KEY = BuildConfig.API_KEY
+object ConstantValue {
+
+    const val API_KEY = BuildConfig.API_KEY
+    const val BASE_URL = "https://https://api.themoviedb.org/3/"
+    const val BASE_URL_IMAGE = "https://image.tmdb.org/t/p/w500"
 }
