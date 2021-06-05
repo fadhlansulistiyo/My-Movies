@@ -66,10 +66,10 @@ dependencies {
     androidTestImplementation "androidx.test:rules:$androidTestVersion"
     androidTestImplementation "androidx.test.ext:junit:$junitExtversion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    implementation "androidx.test.espresso:espresso-idling-resource:$idlingResVersion"
 
     //networking
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
-    implementation "androidx.test.espresso:espresso-idling-resource:$idlingResVersion"
 }

@@ -1,8 +1,8 @@
 package com.dicoding.mymovies.utils
 
 import com.dicoding.mymovies.R
-import com.dicoding.mymovies.data.MoviesEntity
-import com.dicoding.mymovies.data.TvShowEntity
+import com.dicoding.mymovies.data.source.local.entity.MoviesEntity
+import com.dicoding.mymovies.data.source.local.entity.TvShowEntity
 
 object DataDummy {
 

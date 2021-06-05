@@ -1,8 +1,8 @@
 package com.dicoding.mymovies.ui.detail
 
 import androidx.lifecycle.ViewModel
-import com.dicoding.mymovies.data.MoviesEntity
-import com.dicoding.mymovies.data.TvShowEntity
+import com.dicoding.mymovies.data.source.local.entity.MoviesEntity
+import com.dicoding.mymovies.data.source.local.entity.TvShowEntity
 import com.dicoding.mymovies.utils.DataDummy
 
 class DetailMoviesViewModel : ViewModel() {

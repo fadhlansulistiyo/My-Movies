@@ -1,6 +1,12 @@
 package com.dicoding.mymovies.data.source.remote
 
-class RemoteDataSource private constructor{
+import com.dicoding.mymovies.network.ApiConfig
+import com.dicoding.mymovies.utils.ConstantValue.API_KEY
+import com.dicoding.mymovies.utils.EspressoIdlingResource
+import retrofit2.Call
+import retrofit2.Callback
+
+class RemoteDataSource{
 
     companion object {
         @Volatile
@@ -13,6 +19,12 @@ class RemoteDataSource private constructor{
     }
 
     fun getMovies(callback: LoadMoviesCallback) {
-        val client = ApiConfig.increment()
+        EspressoIdlingResource.increment()
+        val client = ApiConfig.getApiService().getMovies(API_KEY)
+        client.enqueue(object : Callback<>)
+    }
+
+    interface LoadMoviesCallback {
+        fun onMoviesLoaded(movies : List<Movies>)
     }
 }

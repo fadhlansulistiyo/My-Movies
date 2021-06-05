@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dicoding.mymovies.R
-import com.dicoding.mymovies.data.MoviesEntity
+import com.dicoding.mymovies.data.source.local.entity.MoviesEntity
 import com.dicoding.mymovies.databinding.ItemsMoviesBinding
 import com.dicoding.mymovies.ui.detail.DetailMoviesActivity
 import com.dicoding.mymovies.ui.detail.DetailMoviesActivity.Companion.TYPE_MOVIE
