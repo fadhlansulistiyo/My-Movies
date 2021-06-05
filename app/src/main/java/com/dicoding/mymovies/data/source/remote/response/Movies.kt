@@ -1,17 +1,20 @@
-package com.dicoding.mymovies.data.source.local.entity
+package com.dicoding.mymovies.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class DetailEntity(
+data class Movies(
 
     @SerializedName("backdrop_path")
     val backdropPath: String,
 
-    @SerializedName("genres")
-    val genres: List<String>,
+    @SerializedName("genre_ids")
+    val genreIds: List<Int>,
 
     @SerializedName("id")
     val id: Int,
+
+    @SerializedName("original_title")
+    val originalTitle: String,
 
     @SerializedName("overview")
     val overview: String,
@@ -22,13 +25,10 @@ data class DetailEntity(
     @SerializedName("release_date")
     val releaseDate: String,
 
-    @SerializedName("runtime")
-    val runtime: Int,
-
     @SerializedName("title")
     val title: String,
 
     @SerializedName("vote_average")
-    val voteAverage: Double
+    val voteAverage: Double,
 
 )
