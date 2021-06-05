@@ -1,12 +1,25 @@
 package com.dicoding.mymovies.data.source.local.entity
 
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class TvShowEntity(
-    var tvShowId: Int,
+    @SerializedName("id")
+    var moviesId: Int,
+
+    @SerializedName("title")
     var title: String,
+
+    @SerializedName("poster_path")
+    var image: Int,
+
+    @SerializedName("vote_average")
+    var rating: String,
+
     var releaseDate: String,
     var genre: String,
-    var rating: String,
-    var episode: String,
-    var overview: String,
-    var image: Int
-)
+    var duration: String,
+    var overview: String
+) : Parcelable
