@@ -20,4 +20,6 @@
     <string name="score">Score</string>
     <string name="movies">Movies</string>
     <string name="tvShow">Tv Shows</string>
+    <string name="genre_dur">%1$s | %2$s m</string>
+
 </resources>

@@ -4,6 +4,7 @@ import com.dicoding.mymovies.data.source.remote.response.DetailMoviesResponse
 import com.dicoding.mymovies.data.source.remote.response.DetailTvShowResponse
 import com.dicoding.mymovies.data.source.remote.response.MoviesResponse
 import com.dicoding.mymovies.data.source.remote.response.TVShowResponse
+import com.dicoding.mymovies.utils.ConstantValue.API_KEY
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

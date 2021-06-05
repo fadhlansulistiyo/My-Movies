@@ -12,6 +12,7 @@ import com.dicoding.mymovies.databinding.FragmentMoviesBinding
 import com.dicoding.mymovies.databinding.FragmentTvShowBinding
 import com.dicoding.mymovies.ui.movies.MoviesAdapter
 import com.dicoding.mymovies.utils.DataDummy
+import com.dicoding.mymovies.viewmodel.ViewModelFactory
 
 class TvShowFragment : Fragment() {
 
@@ -30,7 +31,9 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[TvShowViewModel::class.java]
+
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
             val tvShow = viewModel.getTvShow()
 
             val tvShowAdapter = TvShowAdapter()
