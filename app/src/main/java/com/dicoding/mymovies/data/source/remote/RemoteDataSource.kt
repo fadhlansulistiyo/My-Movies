@@ -1,5 +1,7 @@
 package com.dicoding.mymovies.data.source.remote
 
+import com.dicoding.mymovies.data.source.remote.response.DetailMoviesResponse
+import com.dicoding.mymovies.data.source.remote.response.Movies
 import com.dicoding.mymovies.network.ApiConfig
 import com.dicoding.mymovies.utils.ConstantValue.API_KEY
 import com.dicoding.mymovies.utils.EspressoIdlingResource
@@ -25,6 +27,14 @@ class RemoteDataSource{
     }
 
     interface LoadMoviesCallback {
-        fun onMoviesLoaded(movies : List<Movies>)
+        fun onMoviesLoaded(movies : List<Movies>?)
+    }
+
+    interface LoadDetailMoviesCallback {
+        fun onDetailMoviesLoaded(moviesDetail: DetailMoviesResponse?)
+    }
+
+    interface LoadTvShowCallback {
+        fun onTvShowLoaded(tvShowL List<>)
     }
 }
