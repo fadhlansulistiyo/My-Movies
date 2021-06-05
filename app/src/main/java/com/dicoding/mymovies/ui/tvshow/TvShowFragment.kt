@@ -34,10 +34,15 @@ class TvShowFragment : Fragment() {
 
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
-            val tvShow = viewModel.getTvShow()
 
             val tvShowAdapter = TvShowAdapter()
-            tvShowAdapter.setTvShow(tvShow)
+
+            fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
+            viewModel.getTvShow().observe(viewLifecycleOwner, { tvShow ->
+                fragmentTvShowBinding.progressBar.visibility = View.GONE
+                tvShowAdapter.setTvShow(tvShow)
+                tvShowAdapter.notifyDataSetChanged()
+            })
 
             with(fragmentTvShowBinding.rvTvShow) {
                 layoutManager = LinearLayoutManager(context)

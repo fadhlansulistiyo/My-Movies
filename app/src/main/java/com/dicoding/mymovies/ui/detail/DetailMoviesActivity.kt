@@ -1,6 +1,7 @@
 package com.dicoding.mymovies.ui.detail
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -39,6 +40,7 @@ class DetailMoviesActivity : AppCompatActivity() {
         setSupportActionBar(activityDetailMoviesBinding.toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        detailContentBinding.progressBar.visibility = View.VISIBLE
 
         val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(this, factory)[DetailMoviesViewModel::class.java]
@@ -88,6 +90,8 @@ class DetailMoviesActivity : AppCompatActivity() {
         Glide.with(this)
             .load(BASE_URL_IMAGE + data.posterPath)
             .into(detailContentBinding.imgPoster)
+
+        detailContentBinding.progressBar.visibility = View.INVISIBLE
     }
 
     /*private fun showDetailMovies(moviesEntity: MoviesEntity) {
