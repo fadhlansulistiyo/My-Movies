@@ -1,16 +1,19 @@
 package com.dicoding.mymovies.data.source.remote.response
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import com.google.gson.annotations.SerializedName
 
-@Parcelize
 data class MoviesResponse(
-    var moviesId: Int,
-    var title: String,
-    var releaseDate: String,
-    var genre: String,
-    var rating: String,
-    var duration: String,
-    var overview: String,
-    var image: Int
-) : Parcelable
+
+    @SerializedName("page")
+    val page: Int,
+
+    @SerializedName("results")
+    val results: List<Movies>,
+
+    @SerializedName("total_pages")
+    val totalPages: Int,
+
+    @SerializedName("total_results")
+    val totalResults: Int
+
+)

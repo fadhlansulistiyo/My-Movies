@@ -58,12 +58,12 @@ class DetailMoviesActivity : AppCompatActivity() {
         detailContentBinding.tvTitle.text = moviesEntity.title
         detailContentBinding.tvReleaseDate.text = moviesEntity.releaseDate
         detailContentBinding.tvGenre.text = moviesEntity.genre
-        detailContentBinding.tvRating.text = moviesEntity.rating
+        detailContentBinding.tvRating.text = moviesEntity.voteAverage
         detailContentBinding.tvDuratingEps.text = moviesEntity.duration
         detailContentBinding.tvOverview.text = moviesEntity.overview
 
         Glide.with(this)
-            .load(moviesEntity.image)
+            .load(moviesEntity.posterPath)
             .apply(
                 RequestOptions.placeholderOf(R.drawable.ic_loading)
                     .error(R.drawable.ic_error)

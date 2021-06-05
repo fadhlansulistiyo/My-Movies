@@ -9,7 +9,7 @@ import org.junit.Before
 class DetailMoviesViewModelTest {
 
     private val dummyMovies = DataDummy.generateDummyMovies()[0]
-    private val moviesId = dummyMovies.moviesId
+    private val moviesId = dummyMovies.id
 
     private val dummyTvShow = DataDummy.generateDummyTvshow()[0]
     private val tvShowId = dummyTvShow.tvShowId
@@ -29,10 +29,10 @@ class DetailMoviesViewModelTest {
         assertEquals(dummyMovies.title, detailMovies.title)
         assertEquals(dummyMovies.releaseDate, detailMovies.releaseDate)
         assertEquals(dummyMovies.genre, detailMovies.genre)
-        assertEquals(dummyMovies.rating, detailMovies.rating)
+        assertEquals(dummyMovies.voteAverage, detailMovies.voteAverage)
         assertEquals(dummyMovies.duration, detailMovies.duration)
         assertEquals(dummyMovies.overview, detailMovies.overview)
-        assertEquals(dummyMovies.image, detailMovies.image)
+        assertEquals(dummyMovies.posterPath, detailMovies.posterPath)
     }
 
     @Test

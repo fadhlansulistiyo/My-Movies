@@ -29,5 +29,5 @@ data class DetailMoviesResponse(
 	val title: String,
 
 	@field:SerializedName("poster_path")
-	val posterPath: Any
+	val posterPath: String
 )

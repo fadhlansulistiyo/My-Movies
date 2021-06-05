@@ -13,13 +13,8 @@ data class TvShowEntity(
     var title: String,
 
     @SerializedName("poster_path")
-    var image: Int,
+    var image: String,
 
     @SerializedName("vote_average")
-    var rating: String,
-
-    var releaseDate: String,
-    var genre: String,
-    var duration: String,
-    var overview: String
+    var rating: Double,
 ) : Parcelable
