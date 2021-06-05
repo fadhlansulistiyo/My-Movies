@@ -1,17 +1,35 @@
 package com.dicoding.mymovies.ui.detail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.dicoding.mymovies.data.source.MoviesRepository
+import com.dicoding.mymovies.data.source.local.entity.DetailEntity
 import com.dicoding.mymovies.data.source.local.entity.MoviesEntity
 import com.dicoding.mymovies.data.source.local.entity.TvShowEntity
 import com.dicoding.mymovies.utils.DataDummy
 
-class DetailMoviesViewModel : ViewModel() {
+class DetailMoviesViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
 
-    fun getDetailMovies(moviesId: Int, listMovies: ArrayList<MoviesEntity>) : MoviesEntity =
-        DataDummy.getDetailMovies(moviesId, listMovies)
+    companion object {
+        const val MOVIES = "movies"
+        const val TV_SHOW = "tvShow"
+    }
 
-    fun getDetailTvShow(tvShowId: Int, listTvShow: ArrayList<TvShowEntity>) : TvShowEntity =
-        DataDummy.getDetailTvShow(tvShowId, listTvShow)
+    private lateinit var detailData : LiveData<DetailEntity>
+
+    fun setMoviesTvShow(id: String, categoty: String) {
+        when (categoty) {
+            MOVIES -> {
+                detailData = moviesRepository.getDetailMovies(id)
+            }
+
+            TV_SHOW -> {
+                detailData = moviesRepository.getDetailTvShow(id)
+            }
+        }
+    }
+
+    fun getDetailData() = detailData
 
     fun getMovies() : List<MoviesEntity> = DataDummy.generateDummyMovies()
 
