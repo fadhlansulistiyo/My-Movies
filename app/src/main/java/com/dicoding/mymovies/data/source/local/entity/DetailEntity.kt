@@ -1,7 +1,10 @@
 package com.dicoding.mymovies.data.source.local.entity
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class DetailEntity(
 
     @SerializedName("backdrop_path")
@@ -30,5 +33,4 @@ data class DetailEntity(
 
     @SerializedName("vote_average")
     val voteAverage: Double
-
-)
+) : Parcelable

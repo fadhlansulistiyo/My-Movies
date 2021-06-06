@@ -7,14 +7,14 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class TvShowEntity(
     @SerializedName("id")
-    var moviesId: Int,
+    var tvShowId: Int,
 
     @SerializedName("title")
     var title: String,
 
     @SerializedName("poster_path")
-    var image: String,
+    var posterPath: String,
 
     @SerializedName("vote_average")
-    var rating: Double,
+    var voteAverage: Double,
 ) : Parcelable

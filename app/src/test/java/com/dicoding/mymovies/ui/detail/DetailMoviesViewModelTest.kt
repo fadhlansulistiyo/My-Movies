@@ -43,10 +43,10 @@ class DetailMoviesViewModelTest {
         assertEquals(dummyTvShow.title, detailTvShow.title)
         assertEquals(dummyTvShow.releaseDate, detailTvShow.releaseDate)
         assertEquals(dummyTvShow.genre, detailTvShow.genre)
-        assertEquals(dummyTvShow.rating, detailTvShow.rating)
+        assertEquals(dummyTvShow.voteAverage, detailTvShow.rating)
         assertEquals(dummyTvShow.episode, detailTvShow.episode)
         assertEquals(dummyTvShow.overview, detailTvShow.overview)
-        assertEquals(dummyTvShow.image, detailTvShow.image)
+        assertEquals(dummyTvShow.posterPath, detailTvShow.image)
     }
 
     @Test

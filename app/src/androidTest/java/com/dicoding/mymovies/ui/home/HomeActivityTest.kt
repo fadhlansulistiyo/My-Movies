@@ -87,7 +87,7 @@ class HomeActivityTest{
 
         // 4. rating
         onView(withId(R.id.tv_rating)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_rating)).check(matches(withText(dummyTvShow[0].rating)))
+        onView(withId(R.id.tv_rating)).check(matches(withText(dummyTvShow[0].voteAverage)))
 
         // 5. duration
         onView(withId(R.id.tv_durating_eps)).check(matches(isDisplayed()))

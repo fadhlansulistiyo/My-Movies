@@ -18,4 +18,4 @@ data class MoviesEntity(
     @SerializedName("vote_average")
     var voteAverage: Double,
 
-    ) : Parcelable
+) : Parcelable

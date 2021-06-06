@@ -10,7 +10,7 @@ import com.dicoding.mymovies.R
 import com.dicoding.mymovies.data.source.local.entity.MoviesEntity
 import com.dicoding.mymovies.databinding.ItemsMoviesBinding
 import com.dicoding.mymovies.ui.detail.DetailMoviesActivity
-import com.dicoding.mymovies.ui.detail.DetailMoviesActivity.Companion.TYPE_MOVIE
+import com.dicoding.mymovies.ui.detail.DetailMoviesViewModel.Companion.MOVIES
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
@@ -30,18 +30,19 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
         return MoviesViewHolder(itemsMoviesBinding)
     }
 
-    override fun onBindViewHolder(holder: MoviesAdapter.MoviesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         val movies = listMovies[position]
         holder.bind(movies)
     }
 
     override fun getItemCount(): Int = listMovies.size
 
-    class MoviesViewHolder(private val binding: ItemsMoviesBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class MoviesViewHolder(private val binding: ItemsMoviesBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movies: MoviesEntity) {
             with(binding) {
                 tvItemTitle.text = movies.title
-                tvItemGenre.text = movies.genre
+                tvItemGenre.text = movies.voteAverage.toString()
+
                 Glide.with(itemView.context)
                     .load(movies.posterPath)
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
@@ -50,8 +51,8 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailMoviesActivity::class.java)
-                    intent.putExtra(DetailMoviesActivity.EXTRA_DETAIL, movies.id)
-                    intent.putExtra(DetailMoviesActivity.EXTRA_TYPE, TYPE_MOVIE)
+                    intent.putExtra(DetailMoviesActivity.EXTRA_FILM, movies.id)
+                    intent.putExtra(DetailMoviesActivity.EXTRA_CATEGORY, MOVIES)
                     itemView.context.startActivity(intent)
                 }
             }

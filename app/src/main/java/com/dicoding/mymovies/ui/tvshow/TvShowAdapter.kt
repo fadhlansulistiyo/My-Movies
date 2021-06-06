@@ -10,7 +10,7 @@ import com.dicoding.mymovies.R
 import com.dicoding.mymovies.data.source.local.entity.TvShowEntity
 import com.dicoding.mymovies.databinding.ItemsTvShowBinding
 import com.dicoding.mymovies.ui.detail.DetailMoviesActivity
-import com.dicoding.mymovies.ui.detail.DetailMoviesActivity.Companion.TYPE_TVSHOW
+import com.dicoding.mymovies.ui.detail.DetailMoviesViewModel.Companion.TV_SHOW
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
@@ -38,17 +38,17 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
         fun bind(tvShow: TvShowEntity) {
             with(binding) {
                 tvItemTitle.text = tvShow.title
-                tvItemGenre.text = tvShow.genre
+                tvItemGenre.text = tvShow.voteAverage.toString()
                 Glide.with(itemView.context)
-                    .load(tvShow.image)
+                    .load(tvShow.posterPath)
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
                     .error(R.drawable.ic_error)
                     .into(imgPoster)
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailMoviesActivity::class.java)
-                    intent.putExtra(DetailMoviesActivity.EXTRA_DETAIL, tvShow.tvShowId)
-                    intent.putExtra(DetailMoviesActivity.EXTRA_TYPE, TYPE_TVSHOW)
+                    intent.putExtra(DetailMoviesActivity.EXTRA_FILM, tvShow.tvShowId)
+                    intent.putExtra(DetailMoviesActivity.EXTRA_CATEGORY, TV_SHOW)
                     itemView.context.startActivity(intent)
                 }
             }

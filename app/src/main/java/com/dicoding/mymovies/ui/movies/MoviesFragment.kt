@@ -42,7 +42,7 @@ class MoviesFragment : Fragment() {
             with(fragmentMoviesBinding.rvMovies) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
-                adapter = moviesAdapter
+                this.adapter = moviesAdapter
             }
         }
     }
