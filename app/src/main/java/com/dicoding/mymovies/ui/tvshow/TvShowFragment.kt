@@ -1,5 +1,6 @@
 package com.dicoding.mymovies.ui.tvshow
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,14 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.mymovies.R
-import com.dicoding.mymovies.databinding.FragmentMoviesBinding
 import com.dicoding.mymovies.databinding.FragmentTvShowBinding
-import com.dicoding.mymovies.ui.movies.MoviesAdapter
-import com.dicoding.mymovies.utils.DataDummy
+import com.dicoding.mymovies.ui.detail.DetailMoviesActivity
+import com.dicoding.mymovies.ui.detail.DetailMoviesViewModel
 import com.dicoding.mymovies.viewmodel.ViewModelFactory
 
-class TvShowFragment : Fragment() {
+class TvShowFragment : Fragment(), TvShowAdapter.OnItemClickCallback {
 
     private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
 
@@ -41,6 +40,7 @@ class TvShowFragment : Fragment() {
             viewModel.getTvShow().observe(viewLifecycleOwner, { tvShow ->
                 fragmentTvShowBinding.progressBar.visibility = View.GONE
                 tvShowAdapter.setTvShow(tvShow)
+                tvShowAdapter.setOnItemClickCallback(this)
                 tvShowAdapter.notifyDataSetChanged()
             })
 
@@ -50,5 +50,13 @@ class TvShowFragment : Fragment() {
                 adapter = tvShowAdapter
             }
         }
+    }
+
+    override fun onItemClicked(id: String) {
+        val intent = Intent(context, DetailMoviesActivity::class.java)
+        intent.putExtra(DetailMoviesActivity.EXTRA_FILM, id)
+        intent.putExtra(DetailMoviesActivity.EXTRA_CATEGORY, DetailMoviesViewModel.TV_SHOW)
+
+        context?.startActivity(intent)
     }
 }

@@ -9,12 +9,20 @@ import com.bumptech.glide.request.RequestOptions
 import com.dicoding.mymovies.R
 import com.dicoding.mymovies.data.source.local.entity.TvShowEntity
 import com.dicoding.mymovies.databinding.ItemsTvShowBinding
-import com.dicoding.mymovies.ui.detail.DetailMoviesActivity
-import com.dicoding.mymovies.ui.detail.DetailMoviesViewModel.Companion.TV_SHOW
+import com.dicoding.mymovies.utils.ConstantValue.BASE_URL_IMAGE
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
     private val listTvShow = ArrayList<TvShowEntity>()
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    interface OnItemClickCallback {
+        fun onItemClicked(id: String)
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     fun setTvShow(tvShow: List<TvShowEntity>?) {
         if (tvShow == null) return
@@ -34,23 +42,28 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
     override fun getItemCount(): Int = listTvShow.size
 
-    class TvShowViewHolder(private val binding: ItemsTvShowBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class TvShowViewHolder(private val binding: ItemsTvShowBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(tvShow: TvShowEntity) {
             with(binding) {
                 tvItemTitle.text = tvShow.title
                 tvItemGenre.text = tvShow.voteAverage.toString()
+
                 Glide.with(itemView.context)
-                    .load(tvShow.posterPath)
+                    .load(BASE_URL_IMAGE + tvShow.posterPath)
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
                     .error(R.drawable.ic_error)
                     .into(imgPoster)
 
                 itemView.setOnClickListener {
+                    onItemClickCallback.onItemClicked(tvShow.tvShowId.toString())
+                }
+
+                /*itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailMoviesActivity::class.java)
                     intent.putExtra(DetailMoviesActivity.EXTRA_FILM, tvShow.tvShowId)
                     intent.putExtra(DetailMoviesActivity.EXTRA_CATEGORY, TV_SHOW)
                     itemView.context.startActivity(intent)
-                }
+                }*/
             }
         }
     }

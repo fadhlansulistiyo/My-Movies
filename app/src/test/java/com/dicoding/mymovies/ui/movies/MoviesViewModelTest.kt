@@ -13,9 +13,10 @@ import org.mockito.junit.MockitoJUnitRunner
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import org.mockito.Mockito.verify
+
 import com.dicoding.mymovies.data.source.local.entity.MoviesEntity
 import com.dicoding.mymovies.utils.DataDummy
-import org.mockito.Mockito.verify
 
 @RunWith(MockitoJUnitRunner::class)
 class MoviesViewModelTest {

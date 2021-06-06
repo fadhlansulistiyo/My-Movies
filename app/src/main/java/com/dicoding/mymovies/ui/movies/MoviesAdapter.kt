@@ -11,10 +11,20 @@ import com.dicoding.mymovies.data.source.local.entity.MoviesEntity
 import com.dicoding.mymovies.databinding.ItemsMoviesBinding
 import com.dicoding.mymovies.ui.detail.DetailMoviesActivity
 import com.dicoding.mymovies.ui.detail.DetailMoviesViewModel.Companion.MOVIES
+import com.dicoding.mymovies.utils.ConstantValue.BASE_URL_IMAGE
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
     private val listMovies = ArrayList<MoviesEntity>()
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    interface OnItemClickCallback {
+        fun onItemClicked(id: String)
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     fun setMovies(movies: List<MoviesEntity>?) {
         if (movies == null) return
@@ -44,17 +54,21 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
                 tvItemGenre.text = movies.voteAverage.toString()
 
                 Glide.with(itemView.context)
-                    .load(movies.posterPath)
+                    .load(BASE_URL_IMAGE + movies.posterPath)
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
                     .error(R.drawable.ic_error)
                     .into(imgPoster)
 
                 itemView.setOnClickListener {
+                    onItemClickCallback.onItemClicked(movies.id.toString())
+                }
+
+                /*itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailMoviesActivity::class.java)
                     intent.putExtra(DetailMoviesActivity.EXTRA_FILM, movies.id)
                     intent.putExtra(DetailMoviesActivity.EXTRA_CATEGORY, MOVIES)
                     itemView.context.startActivity(intent)
-                }
+                }*/
             }
         }
     }
