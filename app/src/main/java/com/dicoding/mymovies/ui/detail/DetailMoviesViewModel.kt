@@ -7,6 +7,7 @@ import com.dicoding.mymovies.data.source.local.entity.DetailEntity
 import com.dicoding.mymovies.data.source.local.entity.MoviesEntity
 import com.dicoding.mymovies.data.source.local.entity.TvShowEntity
 import com.dicoding.mymovies.utils.DataDummy
+import com.dicoding.mymovies.vo.Resource
 
 class DetailMoviesViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
 
@@ -15,23 +16,39 @@ class DetailMoviesViewModel(private val moviesRepository: MoviesRepository) : Vi
         const val TV_SHOW = "tvShow"
     }
 
-    private lateinit var detailData : LiveData<DetailEntity>
+    private lateinit var detailMovies: LiveData<Resource<MoviesEntity>>
+    private lateinit var detailTvShow: LiveData<Resource<TvShowEntity>>
+    // private lateinit var detailData : LiveData<DetailEntity>
 
-    fun setMoviesTvShow(id: String, categoty: String) {
-        when (categoty) {
+    fun setMoviesTvShow(id: String, category: String) {
+        when (category) {
             MOVIES -> {
-                detailData = moviesRepository.getDetailMovies(id)
+                detailMovies = moviesRepository.getDetailMovies(id.toInt())
             }
 
             TV_SHOW -> {
-                detailData = moviesRepository.getDetailTvShow(id)
+                detailTvShow = moviesRepository.getDetailTvShow(id.toInt())
             }
         }
     }
 
-    fun getDetailData() = detailData
+    fun setFavoriteMovies() {
+        val resource = detailMovies.value
+        if (resource?.data != null) {
+            val newState = !resource.data.favorite
+            moviesRepository.setFavoriteMovies(resource.data, newState)
+        }
+    }
 
-    fun getMovies() : List<MoviesEntity> = DataDummy.generateDummyMovies()
+    fun getDetailMovies() = detailMovies
 
-    fun getTvShow() : List<TvShowEntity> = DataDummy.generateDummyTvshow()
+    fun setFavoriteTvShow() {
+        val resource = detailTvShow.value
+        if (resource?. data != null) {
+            val newState = !resource.data.favorite
+            moviesRepository.setFavoriteTvShow(resource.data, newState)
+        }
+    }
+
+    fun getDetailTvShow() = detailTvShow
 }

@@ -1,6 +1,5 @@
 package com.dicoding.mymovies.ui.tvshow
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -55,7 +54,7 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
                     .into(imgPoster)
 
                 itemView.setOnClickListener {
-                    onItemClickCallback.onItemClicked(tvShow.tvShowId.toString())
+                    onItemClickCallback.onItemClicked(tvShow.id.toString())
                 }
 
                 /*itemView.setOnClickListener {

@@ -2,18 +2,37 @@ package com.dicoding.mymovies.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import com.dicoding.mymovies.R
 import com.dicoding.mymovies.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
+
+    private var activityHomeBinding: ActivityHomeBinding? = null
+    private val binding get() = activityHomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val activityHomeBinding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(activityHomeBinding.root)
+        activityHomeBinding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-        activityHomeBinding.viewPager.adapter = sectionsPagerAdapter
-        activityHomeBinding.tabs.setupWithViewPager(activityHomeBinding.viewPager)
+        val bottomNavView = binding?.bottomNav
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
 
-        supportActionBar?.elevation = 0f
+        if (bottomNavView != null) {
+            NavigationUI.setupWithNavController(
+                bottomNavView,
+                navHostFragment.navController
+            )
+        }
+    }
+
+    fun setActionBar(title: String) {
+        supportActionBar?.title = title
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        activityHomeBinding = null
     }
 }

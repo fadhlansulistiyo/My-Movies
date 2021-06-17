@@ -1,21 +1,38 @@
 package com.dicoding.mymovies.data.source.local.entity
 
-import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Parcelize
+@Entity(tableName = "movies_entities")
 data class MoviesEntity(
-    @SerializedName("id")
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
     var id: Int,
 
-    @SerializedName("title")
+    @ColumnInfo(name = "title")
     var title: String,
 
-    @SerializedName("poster_path")
+    @ColumnInfo(name = "posterPath")
     var posterPath: String,
 
-    @SerializedName("vote_average")
+    @ColumnInfo(name = "voteAverage")
     var voteAverage: Double,
 
-) : Parcelable
+    @ColumnInfo(name = "runtime")
+    var runtime: Int,
+
+    @ColumnInfo(name = "releaseDate")
+    var releaseDate: String,
+
+    @ColumnInfo(name = "genres")
+    var genres: String,
+
+    @ColumnInfo(name = "overview")
+    var overview: String,
+
+    @ColumnInfo(name = "favorite")
+    var favorite: Boolean = false
+)

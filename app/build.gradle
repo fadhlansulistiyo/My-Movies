@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -57,6 +58,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+    implementation "androidx.activity:activity-ktx:$activityKTXVersion"
 
     //testing
     testImplementation "junit:junit:$junitVersion"
@@ -76,4 +78,11 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+    //room
+    implementation "androidx.room:room-runtime:$roomRuntimeVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+
+    //pagging
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
 }
