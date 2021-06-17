@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dicoding.mymovies"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.dicoding.mymovies">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyMovies"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity
+            android:name=".ui.checkbuttonfav.BSdivActivity"
+            android:label="@string/title_activity_bsdiv"
+            android:theme="@style/Theme.MyMovies.NoActionBar"></activity>
+        <activity
+            android:name=".ui.checklayout.CheckActivity"
+            android:label="@string/title_activity_check"></activity>
         <activity
             android:name=".ui.detail.DetailMoviesActivity"
             android:label="@string/title_activity_detail_movies"
@@ -23,7 +29,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.home.HomeActivity" />
         </activity>
-
         <activity android:name=".ui.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

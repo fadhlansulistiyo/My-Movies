@@ -18,7 +18,6 @@ class DetailMoviesViewModel(private val moviesRepository: MoviesRepository) : Vi
 
     private lateinit var detailMovies: LiveData<Resource<MoviesEntity>>
     private lateinit var detailTvShow: LiveData<Resource<TvShowEntity>>
-    // private lateinit var detailData : LiveData<DetailEntity>
 
     fun setMoviesTvShow(id: String, category: String) {
         when (category) {
