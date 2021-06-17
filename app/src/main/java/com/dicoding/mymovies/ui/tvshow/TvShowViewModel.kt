@@ -7,5 +7,5 @@ import com.dicoding.mymovies.utils.DataDummy
 
 class TvShowViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
 
-    fun getTvShow() = moviesRepository.getTvShow()
+    fun getTvShow(sort: String) = moviesRepository.getTvShow(sort)
 }

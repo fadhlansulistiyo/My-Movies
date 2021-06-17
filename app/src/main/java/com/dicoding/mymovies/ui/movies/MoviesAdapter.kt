@@ -2,6 +2,8 @@ package com.dicoding.mymovies.ui.movies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -10,9 +12,20 @@ import com.dicoding.mymovies.data.source.local.entity.MoviesEntity
 import com.dicoding.mymovies.databinding.ItemsFilmBinding
 import com.dicoding.mymovies.utils.ConstantValue.BASE_URL_IMAGE
 
-class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+class MoviesAdapter : PagedListAdapter<MoviesEntity, MoviesAdapter.MoviesViewHolder>(DIFF_CALLBACK) {
 
-    private val listMovies = ArrayList<MoviesEntity>()
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MoviesEntity>() {
+            override fun areItemsTheSame(oldItem: MoviesEntity, newItem: MoviesEntity): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: MoviesEntity, newItem: MoviesEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
+
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     interface OnItemClickCallback {
@@ -21,12 +34,6 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
-    }
-
-    fun setMovies(movies: List<MoviesEntity>?) {
-        if (movies == null) return
-        this.listMovies.clear()
-        this.listMovies.addAll(movies)
     }
 
     override fun onCreateViewHolder(
@@ -38,11 +45,11 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-        val movies = listMovies[position]
-        holder.bind(movies)
+        val movies = getItem(position)
+        if (movies != null) {
+            holder.bind(movies)
+        }
     }
-
-    override fun getItemCount(): Int = listMovies.size
 
     inner class MoviesViewHolder(private val binding: ItemsFilmBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movies: MoviesEntity) {

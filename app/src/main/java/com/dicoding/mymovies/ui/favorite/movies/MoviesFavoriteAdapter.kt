@@ -10,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.dicoding.mymovies.R
 import com.dicoding.mymovies.data.source.local.entity.MoviesEntity
 import com.dicoding.mymovies.databinding.ItemsFilmBinding
+import com.dicoding.mymovies.utils.ConstantValue
 
 class MoviesFavoriteAdapter : PagedListAdapter<MoviesEntity, MoviesFavoriteAdapter.MoviesFavoriteViewHolder>(DIFF_CALLBACK) {
 
@@ -62,7 +63,7 @@ class MoviesFavoriteAdapter : PagedListAdapter<MoviesEntity, MoviesFavoriteAdapt
                 tvItemRating.text = moviesEntity.voteAverage.toString()
 
                 Glide.with(itemView.context)
-                    .asBitmap()
+                    .load(ConstantValue.BASE_URL_IMAGE + moviesEntity.posterPath)
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading))
                     .error(R.drawable.ic_error)
                     .into(imgPoster)

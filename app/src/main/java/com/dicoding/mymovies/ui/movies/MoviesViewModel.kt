@@ -7,5 +7,5 @@ import com.dicoding.mymovies.utils.DataDummy
 
 class MoviesViewModel(private val moviesRepository: MoviesRepository) : ViewModel() {
 
-    fun getMovies() = moviesRepository.getMovies()
+    fun getMovies(sort: String) = moviesRepository.getMovies(sort)
 }
