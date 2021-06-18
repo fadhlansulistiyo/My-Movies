@@ -3,10 +3,8 @@ package com.dicoding.mymovies.ui.detail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import com.dicoding.mymovies.data.source.MoviesRepository
-import com.dicoding.mymovies.data.source.local.entity.DetailEntity
 import com.dicoding.mymovies.utils.DataDummy
 import org.junit.Test
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.mockito.Mock
@@ -76,17 +74,32 @@ class DetailMoviesViewModelTest {
     }
 
     @Before
-    fun setupTvShow() {
+    fun setupTvShowDetail() {
         viewModel = DetailMoviesViewModel(moviesRepository)
     }
 
     @Test
     fun getDetailTvShow() {
-        //TODO
+        val dummyDetailTvShow = Resource.success(DataDummy.getDetailTvShow())
+        val tvShow = MutableLiveData<Resource<TvShowEntity>>()
+        tvShow.value = dummyDetailTvShow
+
+        `when`(moviesRepository.getDetailTvShow(tvShowId)).thenReturn(tvShow)
+        viewModel.setMoviesTvShow(tvShowId.toString(), TV_SHOW)
+        viewModel.getDetailTvShow().observeForever(tvShowObserver)
+        verify(tvShowObserver).onChanged(dummyDetailTvShow)
     }
 
     @Test
     fun setFavoriteTvShow() {
-        //TODO
+       val dummyDetailTvShow = Resource.success(DataDummy.getDetailTvShow())
+        val tvShow = MutableLiveData<Resource<TvShowEntity>>()
+        tvShow.value = dummyDetailTvShow
+
+        `when`(moviesRepository.getDetailTvShow(tvShowId)).thenReturn(tvShow)
+        viewModel.setMoviesTvShow(tvShowId.toString(), TV_SHOW)
+        viewModel.setFavoriteTvShow()
+        verify(moviesRepository).setFavoriteTvShow(tvShow.value!!.data as TvShowEntity, true)
+        verifyNoMoreInteractions(tvShowObserver)
     }
 }

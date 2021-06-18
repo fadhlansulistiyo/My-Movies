@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.mymovies.R
-import com.dicoding.mymovies.databinding.FragmentTvShowBinding
+import com.dicoding.mymovies.databinding.FragmentTvShowFavoriteBinding
 import com.dicoding.mymovies.ui.detail.DetailMoviesActivity
 import com.dicoding.mymovies.ui.detail.DetailMoviesViewModel.Companion.TV_SHOW
 import com.dicoding.mymovies.viewmodel.ViewModelFactory
@@ -19,8 +19,8 @@ import com.google.android.material.snackbar.Snackbar
 
 class TvShowFavoriteFragment : Fragment(), TvShowFavoriteAdapter.OnItemClickCallback {
 
-    private var fragmentTvShowBinding: FragmentTvShowBinding? = null
-    private val binding get() = fragmentTvShowBinding
+    private var fragmentTvShowFavoriteBinding: FragmentTvShowFavoriteBinding? = null
+    private val binding get() = fragmentTvShowFavoriteBinding
 
     private lateinit var adapter: TvShowFavoriteAdapter
     private lateinit var viewModel: TvShowFavoriteViewModel
@@ -30,14 +30,14 @@ class TvShowFavoriteFragment : Fragment(), TvShowFavoriteAdapter.OnItemClickCall
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
+        fragmentTvShowFavoriteBinding = FragmentTvShowFavoriteBinding.inflate(layoutInflater, container, false)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        itemTouchHelper.attachToRecyclerView(binding?.rvTvShow)
+        itemTouchHelper.attachToRecyclerView(binding?.rvFavoriteTvShow)
 
         if(activity != null) {
             val factory = ViewModelFactory.getInstance(requireContext())
@@ -52,7 +52,7 @@ class TvShowFavoriteFragment : Fragment(), TvShowFavoriteAdapter.OnItemClickCall
                 }
             })
 
-            with(binding?.rvTvShow) {
+            with(binding?.rvFavoriteTvShow) {
                 this?.layoutManager = LinearLayoutManager(context)
                 this?.setHasFixedSize(true)
                 this?.adapter = adapter

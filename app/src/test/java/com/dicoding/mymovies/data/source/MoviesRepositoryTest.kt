@@ -62,6 +62,17 @@ class MoviesRepositoryTest {
         assertNotNull(moviesDetailEntity)
         assertEquals(moviesDetail.id, moviesDetailEntity.data?.id)
     }
+    @Test
+    fun getDetailTvShow() {
+        val dummyDetail = MutableLiveData<TvShowEntity>()
+        dummyDetail.value = DataDummy.getDetailTvShow()
+        `when`(local.getTvShowById(tvShowId)).thenReturn(dummyDetail)
+
+        val tvShowDetailEntity = LiveDataTestUtil.getValue(moviesRepository.getDetailTvShow(tvShowId))
+        verify(local).getTvShowById(tvShowId)
+        assertNotNull(tvShowDetailEntity)
+        assertEquals(tvShowDetail.id, tvShowDetailEntity.data?.id)
+    }
 
     @Test
     fun getFavoriteMovies() {
@@ -96,17 +107,7 @@ class MoviesRepositoryTest {
         assertEquals(tvShowResponse.size, tvShowEntity.data?.size)
     }
 
-    @Test
-    fun getDetailTvShow() {
-        val dummyDetail = MutableLiveData<TvShowEntity>()
-        dummyDetail.value = DataDummy.getDetailTvShow()
-        `when`(local.getTvShowById(tvShowId)).thenReturn(dummyDetail)
-
-        val tvShowDetailEntity = LiveDataTestUtil.getValue(moviesRepository.getDetailTvShow(tvShowId))
-        verify(local).getTvShowById(tvShowId)
-        assertNotNull(tvShowDetailEntity)
-        assertEquals(tvShowDetail.id, tvShowDetailEntity.data?.id)
-    }
+    //=====
 
     @Test
     fun getFavoriteTvShow() {

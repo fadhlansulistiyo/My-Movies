@@ -44,7 +44,7 @@ class TvShowFragment : Fragment(), TvShowAdapter.OnItemClickCallback {
             fragmentTvShowBinding.progressBar.visibility = View.VISIBLE
 
             val factory = ViewModelFactory.getInstance(requireActivity())
-            val viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
+            viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
             tvShowAdapter = TvShowAdapter()
             viewModel.getTvShow(RATING_BEST).observe(viewLifecycleOwner, tvShowObserver)

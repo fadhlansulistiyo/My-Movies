@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_movies" />
     <item
         android:id="@+id/tvShowFragment"
-        android:title="@string/tv_show"
+        android:title="@string/tvShow"
         android:icon="@drawable/ic_tv_show" />
     <item
         android:id="@+id/favoriteFragment"

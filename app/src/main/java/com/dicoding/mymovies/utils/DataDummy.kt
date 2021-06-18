@@ -46,14 +46,14 @@ object DataDummy {
 
     fun getDetailMovies() : MoviesEntity {
         return MoviesEntity(
-            517096,
-            "Cosmoball",
-            "/eDJYDXRoWoUzxjd52gtz5ODTSU1.jpg",
-            5.3,
-            115,
-            "2020-08-27",
-            "Science Fiction, Adventure",
-            "Cosmoball is a mesmerizing intergalactic game of future played between humans and aliens at the giant extraterrestrial ship hovering in the sky over Earth. A young man with enormous power of an unknown nature joins the team of hot-headed superheroes in exchange for a cure for his mother’s deadly illness. The Four from Earth will fight not only to defend the honor of their home planet in the spectacular game, but to face the unprecedented threat to the Galaxy and embrace their own destiny.",
+            464052,
+            "Wonder Woman 1984",
+            "8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg",
+            7.1,
+            151,
+            "2020-12-16",
+            "Fantasy, Action, Adventure",
+            "Wonder Woman comes into conflict with the Soviet Union during the Cold War in the 1980s and finds a formidable foe by the name of the Cheetah.",
             false
         )
     }

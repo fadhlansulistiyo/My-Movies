@@ -13,10 +13,12 @@ import org.mockito.junit.MockitoJUnitRunner
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import org.mockito.Mockito.verify
 
 import com.dicoding.mymovies.data.source.local.entity.MoviesEntity
 import com.dicoding.mymovies.utils.DataDummy
+import com.dicoding.mymovies.vo.Resource
 
 @RunWith(MockitoJUnitRunner::class)
 class MoviesViewModelTest {
@@ -30,7 +32,10 @@ class MoviesViewModelTest {
     private lateinit var moviesRepository: MoviesRepository
 
     @Mock
-    private lateinit var observer: Observer<List<MoviesEntity>>
+    private lateinit var observer: Observer<Resource<PagedList<MoviesEntity>>>
+
+    @Mock
+    private lateinit var pagedList: PagedList<MoviesEntity>
 
     @Before
     fun setup() {
@@ -39,17 +44,18 @@ class MoviesViewModelTest {
 
     @Test
     fun getMovies() {
-        val dummyMovies = DataDummy.generateDummyMovies()
-        val movies = MutableLiveData<List<MoviesEntity>>()
+        val dummyMovies = Resource.success(pagedList)
+        `when`(dummyMovies.data?.size).thenReturn(3)
+        val movies = MutableLiveData<Resource<PagedList<MoviesEntity>>>()
         movies.value = dummyMovies
 
-        `when`(moviesRepository.getMovies()).thenReturn(movies)
-        val movie = viewModel.getMovies().value
-        verify(moviesRepository).getMovies()
+        `when`(moviesRepository.getMovies("BEST")).thenReturn(movies)
+        val movie = viewModel.getMovies("BEST").value?.data
+        verify(moviesRepository).getMovies("BEST")
         assertNotNull(movie)
         assertEquals(3, movie?.size)
 
-        viewModel.getMovies().observeForever(observer)
+        viewModel.getMovies("BEST").observeForever(observer)
         verify(observer).onChanged(dummyMovies)
     }
 }
