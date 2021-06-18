@@ -12,8 +12,12 @@ import org.junit.Rule
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import androidx.lifecycle.Observer
+import com.dicoding.mymovies.data.source.local.entity.MoviesEntity
+import com.dicoding.mymovies.data.source.local.entity.TvShowEntity
 import com.dicoding.mymovies.ui.detail.DetailMoviesViewModel.Companion.MOVIES
 import com.dicoding.mymovies.ui.detail.DetailMoviesViewModel.Companion.TV_SHOW
+import com.dicoding.mymovies.vo.Resource
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import org.junit.runner.RunWith
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
@@ -22,10 +26,10 @@ import org.mockito.junit.MockitoJUnitRunner
 class DetailMoviesViewModelTest {
 
     private val dummyMovies = DataDummy.getDetailMovies()
-    private val moviesId = dummyMovies.id.toString()
+    private val moviesId = dummyMovies.id
 
     private val dummyTvShow = DataDummy.getDetailTvShow()
-    private val tvShowId = dummyTvShow.id.toString()
+    private val tvShowId = dummyTvShow.id
 
     private lateinit var viewModel: DetailMoviesViewModel
 
@@ -36,7 +40,10 @@ class DetailMoviesViewModelTest {
     private lateinit var moviesRepository: MoviesRepository
 
     @Mock
-    private lateinit var moviesObserver: Observer<DetailEntity>
+    private lateinit var moviesObserver: Observer<Resource<MoviesEntity>>
+
+    @Mock
+    private lateinit var tvShowObserver: Observer<Resource<TvShowEntity>>
 
     @Before
     fun setupMoviesDetail() {
@@ -45,26 +52,27 @@ class DetailMoviesViewModelTest {
 
     @Test
     fun getDetailMovies() {
-        val movie = MutableLiveData<DetailEntity>()
-        movie.value = dummyMovies
+        val dummyDetailMovies = Resource.success(DataDummy.getDetailMovies())
+        val movies = MutableLiveData<Resource<MoviesEntity>>()
+        movies.value = dummyDetailMovies
 
-        `when`(moviesRepository.getDetailMovies(moviesId)).thenReturn(movie)
-        viewModel.setMoviesTvShow(moviesId, MOVIES)
-        val detailEntity = viewModel.getDetailData().value as DetailEntity
-        verify(moviesRepository).getDetailMovies(moviesId)
+        `when`(moviesRepository.getDetailMovies(moviesId)).thenReturn(movies)
+        viewModel.setMoviesTvShow(moviesId.toString(), MOVIES)
+        viewModel.getDetailMovies().observeForever(moviesObserver)
+        verify(moviesObserver).onChanged(dummyDetailMovies)
+    }
 
-        assertNotNull(detailEntity)
-        assertEquals(dummyMovies.id, detailEntity.id)
-        assertEquals(dummyMovies.title, detailEntity.title)
-        assertEquals(dummyMovies.releaseDate, detailEntity.releaseDate)
-        assertEquals(dummyMovies.genres, detailEntity.genres)
-        assertEquals(dummyMovies.voteAverage.toInt(), detailEntity.voteAverage.toInt())
-        assertEquals(dummyMovies.runtime, detailEntity.runtime)
-        assertEquals(dummyMovies.overview, detailEntity.overview)
-        assertEquals(dummyMovies.posterPath, detailEntity.posterPath)
+    @Test
+    fun setFavoriteMovies() {
+        val dummyDetailMovies = Resource.success(DataDummy.getDetailMovies())
+        val movies = MutableLiveData<Resource<MoviesEntity>>()
+        movies.value = dummyDetailMovies
 
-        viewModel.getDetailData().observeForever(moviesObserver)
-        verify(moviesObserver).onChanged(dummyMovies)
+        `when`(moviesRepository.getDetailMovies(moviesId)).thenReturn(movies)
+        viewModel.setMoviesTvShow(moviesId.toString(), MOVIES)
+        viewModel.setFavoriteMovies()
+        verify(moviesRepository).setFavoriteMovies(movies.value!!.data as MoviesEntity, true)
+        verifyNoMoreInteractions(moviesObserver)
     }
 
     @Before
@@ -74,25 +82,11 @@ class DetailMoviesViewModelTest {
 
     @Test
     fun getDetailTvShow() {
-        val tvShow = MutableLiveData<DetailEntity>()
-        tvShow.value = dummyTvShow
+        //TODO
+    }
 
-        `when`(moviesRepository.getDetailTvShow(tvShowId)).thenReturn(tvShow)
-        viewModel.setMoviesTvShow(tvShowId, TV_SHOW)
-        val detailEntity = viewModel.getDetailData().value as DetailEntity
-        verify(moviesRepository).getDetailTvShow(tvShowId)
-
-        assertNotNull(detailEntity)
-        assertEquals(dummyTvShow.id, detailEntity.id)
-        assertEquals(dummyTvShow.title, detailEntity.title)
-        assertEquals(dummyTvShow.releaseDate, detailEntity.releaseDate)
-        assertEquals(dummyTvShow.genres, detailEntity.genres)
-        assertEquals(dummyTvShow.voteAverage.toInt(), detailEntity.voteAverage.toInt())
-        assertEquals(dummyTvShow.runtime, detailEntity.runtime)
-        assertEquals(dummyTvShow.overview, detailEntity.overview)
-        assertEquals(dummyTvShow.posterPath, detailEntity.posterPath)
-
-        viewModel.getDetailData().observeForever(moviesObserver)
-        verify(moviesObserver).onChanged(dummyTvShow)
+    @Test
+    fun setFavoriteTvShow() {
+        //TODO
     }
 }
