@@ -149,6 +149,23 @@ class HomeActivityTest{
     }
 
     @Test
+    fun deleteFavoriteMovies() {
+        onView(withId(R.id.favoriteFragment)).perform(click())
+
+        onView(withId(R.id.rv_favorite_movies)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.rv_favorite_movies)).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0, click()))
+
+        onView(withId(R.id.icon_add_favorite)).perform(click())
+
+        onView(isRoot()).perform(pressBack())
+
+        
+    }
+
+    @Test
     fun loadFavoriteTvShow() {
         // 1. click list tvShow fragment & click data tvShow
         onView(withId(R.id.tvShowFragment)).perform(click())

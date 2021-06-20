@@ -21,4 +21,16 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/empty_data"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/empty_data"
+        android:src="@drawable/empty"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

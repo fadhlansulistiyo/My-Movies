@@ -36,5 +36,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_bsdiv">BSdivActivity</string>
+    <string name="empty_data">No Data</string>
 
 </resources>
